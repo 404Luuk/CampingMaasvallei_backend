@@ -1,4 +1,4 @@
-﻿using CampingMaasvallei.Context;
+﻿using CampingMaasvallei_v2.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,7 +16,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace CampingMaasvallei
+namespace CampingMaasvallei_v2
 {
     public class Startup
     {
@@ -28,7 +28,7 @@ namespace CampingMaasvallei
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextFactory<CampingMaasvalleiContext>(option => option.UseSqlServer("Server=BUTTERDOG;Database=Campingmaasvallei_database;trusted_connection=true;", options => options.EnableRetryOnFailure()));
+            services.AddDbContextFactory<CampingMaasvalleiContext>(option => option.UseSqlServer("Server=BUTTERDOG;Database=Campingmaasvallei_database;trusted_connection=true;TrustServerCertificate=True", options => options.EnableRetryOnFailure()));
             services.AddCors(options =>
             {
                 options.AddPolicy(name: "AllowAll",
@@ -54,12 +54,12 @@ namespace CampingMaasvallei
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AvisiAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CampingMaasvalleiAPI v1"));
             }
             else
             {
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AvisiAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CampingMaasvalleiAPI v1"));
             }
 
             app.UseHttpsRedirection();
